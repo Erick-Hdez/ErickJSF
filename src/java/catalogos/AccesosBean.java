@@ -24,8 +24,10 @@ import javax.faces.context.FacesContext;
 @RequestScoped
 public class AccesosBean {
 
+   
     private List<SAccesos> listaAccesos;
     private SAccesos accesos;
+  
     private int idAcceso;
 
     public AccesosBean() {
@@ -59,9 +61,9 @@ public class AccesosBean {
         }
     }
 
-    public void editarAcceso() {
+    public void editarAcceso(SAccesos accesos) {
         try {
-             SAccesosJpaController modelo = new SAccesosJpaController();
+            SAccesosJpaController modelo = new SAccesosJpaController();
             modelo.edit(accesos);
             mostrarCatalogoAccesos();
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Datos Editados", "");
@@ -82,6 +84,7 @@ public class AccesosBean {
             Logger.getLogger(AccesosBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
 
 //<editor-fold defaultstate="collapsed" desc="GETS y SETS">
     /**
@@ -125,5 +128,6 @@ public class AccesosBean {
     public void setIdAcceso(int idAcceso) {
         this.idAcceso = idAcceso;
     }
+   
 //</editor-fold>
 }

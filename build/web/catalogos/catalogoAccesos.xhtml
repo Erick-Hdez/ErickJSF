@@ -35,7 +35,9 @@
                          editable="true" rows="6" paginator="true"
                          style="margin-bottom: 20px">
 
-                <p:ajax event="rowEdit" listener="#{accesosBean.editarAcceso(acceso)}" update=":form:msg" />
+                <p:ajax event="rowEdit" 
+                        listener="#{accesosBean.editarAcceso(acceso)}" 
+                        update="table, :form:msg" />
 
                 <p:column headerText="Id Acceso" filterBy="#{acceso.idAcceso}" filterStyle="width:100px;" filterMatchMode="contains">
                     <p:cellEditor>
@@ -72,6 +74,7 @@
                         </f:facet>
                     </p:cellEditor>    
                 </p:column>
+                
                 <p:column headerText="Activo" filterBy="#{acceso.activo}" filterStyle="width:100px;" filterMatchMode="contains">
                     <p:cellEditor>
                         <f:facet name="output">
@@ -84,17 +87,7 @@
                     </p:cellEditor>    
                 </p:column>
 
-                <p:column headerText="Fecha Servidor" filterBy="#{acceso.fechaServidor}" filterStyle="width:100px;" filterMatchMode="contains">
-                    <p:cellEditor>
-                        <f:facet name="output">
-                            <h:outputText value="#{acceso.fechaServidor}"/>
-                        </f:facet>
-                        <f:facet name="input">
-                            <p:inputText id="fechaServidor" type="text" value="#{acceso.fechaServidor}"
-                                         maxlength="50" style="width: 100%" />
-                        </f:facet>
-                    </p:cellEditor>    
-                </p:column>
+             
                 <p:column headerText="Fecha Baja" filterBy="#{acceso.fechaBaja}" filterStyle="width:100px;" filterMatchMode="contains">
                     <p:cellEditor>
                         <f:facet name="output">

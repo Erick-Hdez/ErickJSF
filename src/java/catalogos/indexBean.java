@@ -19,13 +19,13 @@ public class indexBean {
     private int idUsuario;
     private String user;
     private String nombreUsuario;
-    
+
     public indexBean() {
-         nombreUsuario = TraeDatoSesion.traerNombreUsuario();
-         user = TraeDatoSesion.traerUsuario();
+        idUsuario = TraeDatoSesion.traerIdUsuario();
+        nombreUsuario = TraeDatoSesion.traerNombreUsuario();
+        user = TraeDatoSesion.traerUsuario();
 
     }
-    
 
 //<editor-fold defaultstate="collapsed" desc="GETS y SETS">
     /**
@@ -34,35 +34,35 @@ public class indexBean {
     public int getIdUsuario() {
         return idUsuario;
     }
-    
+
     /**
      * @param idUsuario the idUsuario to set
      */
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
-    
+
     /**
      * @return the user
      */
     public String getUser() {
         return user;
     }
-    
+
     /**
      * @param user the user to set
      */
     public void setUser(String user) {
         this.user = user;
     }
-    
+
     /**
      * @return the nombreUsuario
      */
     public String getNombreUsuario() {
         return nombreUsuario;
     }
-    
+
     /**
      * @param nombreUsuario the nombreUsuario to set
      */

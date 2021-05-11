@@ -172,5 +172,9 @@ public class SPerfiles implements Serializable {
     public String toString() {
         return "entidades.SPerfiles[ idPerfil=" + idPerfil + " ]";
     }
+
+    public void getFechaAlta(Date date) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

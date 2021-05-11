@@ -12,11 +12,11 @@ import javax.faces.context.FacesContext;
  */
 public class TraeDatoSesion {
     
-//    public static int traerIdUsuario() {
-//        int usuario = 0;
-//        usuario = (int) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("idUsuario");
-//        return usuario;
-//    }
+    public static int traerIdUsuario() {
+        int usuario = 0;
+        usuario = (int) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("idUsuario");
+        return usuario;
+    }
 
 
     public static String traerUsuario() {
