@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:panelMenu style="width: 230px">
+                <p:submenu label="Catálogos">
+                    <p:menuitem value="Ciudad" action="#{menu.redirecionar(1)}" update="centroLayout" />
+                    <p:menuitem value="Tipo de Teléfono" action="#{menu.redirecionar(2)}" update="centroLayout"/>
+                    <p:menuitem value="Accesos" action="#{menu.redirecionar(3)}" update="centroLayout"/>
+                    <p:menuitem value="Perfiles" action="#{menu.redirecionar(4)}" update="centroLayout"/>
+                </p:submenu>
+                <p:submenu label="Servicios">
+                    <p:menuitem value="Consultoria"/>
+                    <p:menuitem value="Desarrollo"/>
+                    <p:menuitem value="Soporte"/>
+                </p:submenu>
+                <p:submenu label="Home">
+                    <p:menuitem value="Inicio" action="#{menu.redirecionar(5)}" update="centroLayout"/>
+                    <p:menuitem value="Nosotros" url="#"/>
+                    <p:menuitem value="Blog" url="#"/>
+                    <p:menuitem value="Contacto" url="#"/>
+                </p:submenu>
+            </p:panelMenu>
+        </h:form>
+    </h:body>
+</html>
+
