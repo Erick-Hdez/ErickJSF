@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,6 +36,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "SAccesos.findByFechaServidor", query = "SELECT s FROM SAccesos s WHERE s.fechaServidor = :fechaServidor"),
     @NamedQuery(name = "SAccesos.findByFechaBaja", query = "SELECT s FROM SAccesos s WHERE s.fechaBaja = :fechaBaja")})
 public class SAccesos implements Serializable {
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sAccesos")
+    private Collection<SPerfilesAccesos> sPerfilesAccesosCollection;
 
     @OneToMany(mappedBy = "idAcceso")
     private Collection<SAplicaciones> sAplicacionesCollection;
@@ -157,6 +161,15 @@ public class SAccesos implements Serializable {
 
     public void setSAplicacionesCollection(Collection<SAplicaciones> sAplicacionesCollection) {
         this.sAplicacionesCollection = sAplicacionesCollection;
+    }
+
+    @XmlTransient
+    public Collection<SPerfilesAccesos> getSPerfilesAccesosCollection() {
+        return sPerfilesAccesosCollection;
+    }
+
+    public void setSPerfilesAccesosCollection(Collection<SPerfilesAccesos> sPerfilesAccesosCollection) {
+        this.sPerfilesAccesosCollection = sPerfilesAccesosCollection;
     }
     
 }

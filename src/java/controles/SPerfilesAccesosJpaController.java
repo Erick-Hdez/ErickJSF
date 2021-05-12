@@ -7,16 +7,18 @@ package controles;
 
 import controles.exceptions.NonexistentEntityException;
 import controles.exceptions.PreexistingEntityException;
-import entidades.SPerfilesAccesos;
-import entidades.SPerfilesAccesosPK;
 import java.io.Serializable;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import entidades.SAccesos;
+import entidades.SPerfiles;
+import entidades.SPerfilesAccesos;
+import entidades.SPerfilesAccesosPK;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import utils.LocalEntityManagerFactory;
 
 /**
@@ -44,7 +46,25 @@ public class SPerfilesAccesosJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            SAccesos SAccesos = SPerfilesAccesos.getSAccesos();
+            if (SAccesos != null) {
+                SAccesos = em.getReference(SAccesos.getClass(), SAccesos.getIdAcceso());
+                SPerfilesAccesos.setSAccesos(SAccesos);
+            }
+            SPerfiles SPerfiles = SPerfilesAccesos.getSPerfiles();
+            if (SPerfiles != null) {
+                SPerfiles = em.getReference(SPerfiles.getClass(), SPerfiles.getIdPerfil());
+                SPerfilesAccesos.setSPerfiles(SPerfiles);
+            }
             em.persist(SPerfilesAccesos);
+            if (SAccesos != null) {
+                SAccesos.getSPerfilesAccesosCollection().add(SPerfilesAccesos);
+                SAccesos = em.merge(SAccesos);
+            }
+            if (SPerfiles != null) {
+                SPerfiles.getSPerfilesAccesosCollection().add(SPerfilesAccesos);
+                SPerfiles = em.merge(SPerfiles);
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             if (findSPerfilesAccesos(SPerfilesAccesos.getSPerfilesAccesosPK()) != null) {
@@ -65,7 +85,36 @@ public class SPerfilesAccesosJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            SPerfilesAccesos persistentSPerfilesAccesos = em.find(SPerfilesAccesos.class, SPerfilesAccesos.getSPerfilesAccesosPK());
+            SAccesos SAccesosOld = persistentSPerfilesAccesos.getSAccesos();
+            SAccesos SAccesosNew = SPerfilesAccesos.getSAccesos();
+            SPerfiles SPerfilesOld = persistentSPerfilesAccesos.getSPerfiles();
+            SPerfiles SPerfilesNew = SPerfilesAccesos.getSPerfiles();
+            if (SAccesosNew != null) {
+                SAccesosNew = em.getReference(SAccesosNew.getClass(), SAccesosNew.getIdAcceso());
+                SPerfilesAccesos.setSAccesos(SAccesosNew);
+            }
+            if (SPerfilesNew != null) {
+                SPerfilesNew = em.getReference(SPerfilesNew.getClass(), SPerfilesNew.getIdPerfil());
+                SPerfilesAccesos.setSPerfiles(SPerfilesNew);
+            }
             SPerfilesAccesos = em.merge(SPerfilesAccesos);
+            if (SAccesosOld != null && !SAccesosOld.equals(SAccesosNew)) {
+                SAccesosOld.getSPerfilesAccesosCollection().remove(SPerfilesAccesos);
+                SAccesosOld = em.merge(SAccesosOld);
+            }
+            if (SAccesosNew != null && !SAccesosNew.equals(SAccesosOld)) {
+                SAccesosNew.getSPerfilesAccesosCollection().add(SPerfilesAccesos);
+                SAccesosNew = em.merge(SAccesosNew);
+            }
+            if (SPerfilesOld != null && !SPerfilesOld.equals(SPerfilesNew)) {
+                SPerfilesOld.getSPerfilesAccesosCollection().remove(SPerfilesAccesos);
+                SPerfilesOld = em.merge(SPerfilesOld);
+            }
+            if (SPerfilesNew != null && !SPerfilesNew.equals(SPerfilesOld)) {
+                SPerfilesNew.getSPerfilesAccesosCollection().add(SPerfilesAccesos);
+                SPerfilesNew = em.merge(SPerfilesNew);
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -94,6 +143,16 @@ public class SPerfilesAccesosJpaController implements Serializable {
                 SPerfilesAccesos.getSPerfilesAccesosPK();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The SPerfilesAccesos with id " + id + " no longer exists.", enfe);
+            }
+            SAccesos SAccesos = SPerfilesAccesos.getSAccesos();
+            if (SAccesos != null) {
+                SAccesos.getSPerfilesAccesosCollection().remove(SPerfilesAccesos);
+                SAccesos = em.merge(SAccesos);
+            }
+            SPerfiles SPerfiles = SPerfilesAccesos.getSPerfiles();
+            if (SPerfiles != null) {
+                SPerfiles.getSPerfilesAccesosCollection().remove(SPerfilesAccesos);
+                SPerfiles = em.merge(SPerfiles);
             }
             em.remove(SPerfilesAccesos);
             em.getTransaction().commit();
@@ -149,5 +208,5 @@ public class SPerfilesAccesosJpaController implements Serializable {
             em.close();
         }
     }
-    
+
 }

@@ -5,7 +5,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
         <style>
             .ui-icon-home,
@@ -26,44 +26,89 @@
         <title>Perfiles</title>
     </h:head>
     <h:body>
-        
-        <p:growl id="msg" showDetail="true"/>
-        <h:form id="formTblPer">
-            <p:commandButton value="Nuevo Registro" onclick="PF('dlgRegPef').show()"/>
-            <p:dataTable id="tblPer" value="#{perfilesBean.listaPerfiles}" var="perfiles"
-                         paginator="true" rows="5">
-                <p:column>
-                    <p:commandButton value="Modificar"/>
-                    <p:commandButton value="Eliminar"/>
+        <h:form id="form">
+            <h1>Perfiles</h1>
+            <p:growl id="msg" showDetail="true"/>
+
+            <p:dataTable id="table" var="perfiles" value="#{perfilesBean.listaPerfiles}" 
+                         editable="true" rows="6" paginator="true"
+                         style="margin-bottom: 20px">
+
+                <!-- pendiente -->
+                <p:ajax event="rowEdit" 
+                        listener="#{perfilesBean}" 
+                        update="table, :form:msg" />
+                <!-- /pendiente -->
+
+                <p:column headerText="Nombre Perfil" filterBy="#{perfiles.nombrePerfil}" filterStyle="width:100px;" filterMatchMode="contains">
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <h:outputText value="#{perfiles.nombrePerfil}"/>
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText id="idAcceso" type="text" value="#{perfiles.nombrePerfil}"
+                                         maxlength="50" style="width: 100%" />
+                        </f:facet>
+                    </p:cellEditor>    
                 </p:column>
-                <p:column headerText="Nombre Perfil">
-                    <p:outputLabel value="#{perfiles.nombrePerfil}"/>
+
+                <p:column headerText="Descripción" filterBy="#{perfiles.descripcion}" filterStyle="width:100px;" filterMatchMode="contains">
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <h:outputText value="#{perfiles.descripcion}"/>
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText id="nombreaccs" type="text" value="#{perfiles.descripcion}"
+                                         maxlength="50" style="width: 100%" />
+                        </f:facet>
+                    </p:cellEditor>    
                 </p:column>
-                <p:column headerText="Descripción">
-                    <p:outputLabel value="#{perfiles.descripcion}"/>
+
+                <p:column headerText="Editar" style="width:6rem">
+                    <p:rowEditor editTitle="Edit Row" cancelTitle="Cancel Edit" saveTitle="Save Row"/>
+                    <p:commandButton onclick="PF('eliminar').show()" type="reset" icon="ui-icon-trash" />
+                    <p:dialog header="Eliminiar Acceso" widgetVar="eliminar" minHeight="40"
+                              width="350" showEffect="fade" >
+                        <h5>Está seguro que desea eliminar este Acceso?</h5>
+                        <f:facet name="footer">
+                            <p:commandButton ajax="false" immediate="true" value="Cancelar" icon="ui-icon-cancel"
+                                             onclick="PF('eliminar').hide()" />
+                            <p:commandButton  ajax="true" immediate="true" value="Aceptar" icon="ui-icon-check"
+                                              onclick="PF('eliminar').close()"
+                                              action="#{accesosBean.eliminarAcceso(acceso)}" update=":form:table" />
+                        </f:facet>
+                    </p:dialog>
                 </p:column>
             </p:dataTable>
-        </h:form>
 
-        <p:dialog widgetVar="dlgRegPef" header="Nuevo Registro">
-            <h:form>
-                <p:panel id="pnlRegPer">
+            <p:commandButton value="Nuevo" type="button" onclick="PF('dlg').show()" icon="ui-icon-plus"
+                             style="margin-right:20px;border-radius:5px; margin-top:1rem; margin-left: 20px"/>
+            <p:dialog id="altas" header="Nuevo Registro" widgetVar="dlg" minHeight="40" width="420" showEffect="fade" >
+                <p:growl id="msgs" showDetail="true"/>
+                <p:panel>
                     <p:panelGrid columns="2">
-                        <p:outputLabel value="Nombre Perfil"/>
-                        <p:inputText value="#{perfilesBean.perfiles.nombrePerfil}"/>
-                        <p:outputLabel value="Descripción"/>
+                        <p:outputLabel value="Nombre perfil" />
+                        <p:inputText type="text" required="true" maxlength="50" 
+                                     value="#{perfilesBean.perfiles.nombrePerfil}">
+                        </p:inputText>
+
+                        <p:outputLabel value="Descripción" />
                         <p:inputText value="#{perfilesBean.perfiles.descripcion}"/>
                     </p:panelGrid>
+
                     <p:pickList id="plAccesos" value="#{perfilesBean.dualListAccesos}" var="dualAccesos"
                                 itemLabel="#{dualAccesos.nombreAcceso}" itemValue="#{dualAccesos.idAcceso}">
                         <f:facet name="sourceCaption">Accesos Disponibles</f:facet>
                         <f:facet name="targetCaption">Accesos Asignados</f:facet>
                     </p:pickList>
-                    <p:commandButton value="Registrar" actionListener="#{perfilesBean.registrarPerfil()}" 
-                                     update=":formTblPer:tblPer, msg, pnlRegPer" onclick="PF('dlgRegPef').hide()"/>
+
+                    <p:commandButton update=":form:msgs" value="Guardar" icon="ui-icon-disk"
+                                     onclick="PF('dlg').close()" action="#{perfilesBean.registrarPerfil()}"
+                                     style="width:8rem;display:inline-block;float:right"  />
+
                 </p:panel>
-            </h:form>
-        </p:dialog>
+            </p:dialog>
+        </h:form>
 
     </h:body>
 </html>

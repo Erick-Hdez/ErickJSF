@@ -8,9 +8,9 @@
             <file>file:/C:/Blueweb/Proyectos/respaldo/ErickJsfProject/src/java/catalogos/UsuarioBean.java</file>
             <file>file:/C:/Blueweb/Proyectos/respaldo/ErickJsfProject/src/java/catalogos/AccesosBean.java</file>
             <file>file:/C:/Blueweb/Proyectos/respaldo/ErickJsfProject/src/java/catalogos/menuBean.java</file>
-            <file>file:/C:/Blueweb/Proyectos/respaldo/ErickJsfProject/src/java/catalogos/PerfilesBean.java</file>
             <file>file:/C:/Blueweb/Proyectos/respaldo/ErickJsfProject/web/WEB-INF/web.xml</file>
             <file>file:/C:/Blueweb/Proyectos/respaldo/ErickJsfProject/src/java/catalogos/indexBean.java</file>
+            <file>file:/C:/Blueweb/Proyectos/respaldo/ErickJsfProject/src/java/controles/SAccesosJpaController.java</file>
             <file>file:/C:/Blueweb/Proyectos/respaldo/ErickJsfProject/src/java/utils/TraeDatoSesion.java</file>
         </group>
     </open-files>

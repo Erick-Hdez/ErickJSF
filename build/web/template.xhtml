@@ -12,16 +12,16 @@
 
     </h:head>
 
-    <h:body>
-     <!--  <h:form>
+    <h:body style="background: grey">
+       <!-- <h:form>
             <p:ajaxStatus onstart="PF('status').show()" onsuccess="PF('status').hide()"/>
             <p:dialog widgetVar="status" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
                 <p:graphicImage value="/imagenes/cargando.jpg" width="60px"/>
                 <h:outputLabel value="cargando..."/>
             </p:dialog>
-        </h:form>
+        </h:form>-->
 
-        <p:idleMonitor timeout="40000">
+       <!-- <p:idleMonitor timeout="60000">
             <p:ajax event="active" onstart="PF('dlg').show()"/>
         </p:idleMonitor>
 
@@ -29,10 +29,10 @@
             <p:panel>
                 <h:form>
                     <p:outputLabel value="Tú sesión se a cerrado por inactividad"/>
-                    <p:commandButton value="Ok" oncomplete="PF('dlg').hide()"/>
+                    <p:commandButton value="Ok" actionListener="" oncomplete="PF('dlg').hide()"/>
                 </h:form>
             </p:panel>
-        </p:dialog>-->
+        </p:dialog> -->
 
         <p:layout fullPage="true">
             <p:layoutUnit position="north" size="130" resizable="true" closable="true" collapsible="true">

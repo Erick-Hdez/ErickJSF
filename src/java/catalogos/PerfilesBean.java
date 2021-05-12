@@ -14,6 +14,12 @@ import entidades.SPerfilesAccesos;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import org.primefaces.model.DualListModel;
 import utils.TraeDatoSesion;
 
@@ -21,19 +27,23 @@ import utils.TraeDatoSesion;
  *
  * @author Erick Corral 
  */
+
+@ManagedBean
+@ViewScoped
 public class PerfilesBean {
  
     private SPerfiles perfiles;
     private List<SPerfiles> listaPerfiles;
-    private List<SAccesos> listaAccesos;
+    private List<SAccesos> listaAccesosDisponibles;
     private List<SAccesos> listaAccesosAsignados;
     private DualListModel<SAccesos> dualListAccesos;
+    private Integer idPerfil;
     
     public PerfilesBean() {
         mostrarListaPerfiles();
         mostrarListaAccesos();
         perfiles = new SPerfiles();
-        dualListAccesos = new DualListModel<>(getListaAccesos(), getListaAccesosAsignados());
+        dualListAccesos = new DualListModel<>(getListaAccesosDisponibles(), getListaAccesosAsignados());
     }
     
     public void mostrarListaPerfiles() {
@@ -43,11 +53,11 @@ public class PerfilesBean {
     
     public void mostrarListaAccesos() {
         SAccesosJpaController modelo = new SAccesosJpaController();
-        setListaAccesos(modelo.findSAccesosEntities());
+        setListaAccesosDisponibles(modelo.findSAccesosEntities());
     }
     
     public void registrarPerfil() {
-        List<SAccesos> ListaAccesosStr = new ArrayList<>();
+        List<SAccesos> ListaIdAccesosStr = new ArrayList<>();
         SPerfilesAccesos perfilesAccesos = new SPerfilesAccesos();
         
         SPerfilesJpaController modeloPerfiles = new SPerfilesJpaController();
@@ -58,9 +68,33 @@ public class PerfilesBean {
         perfiles.setIdUsuarioModifica(TraeDatoSesion.traerIdUsuario());
         
         modeloPerfiles.create(perfiles);
+        ListaIdAccesosStr = dualListAccesos.getTarget();
         
-                
+        SAccesos objAccesos = new SAccesos();
+        try {
+            for (Object listaId : ListaIdAccesosStr) {
+                int id = Integer.parseInt(listaId.toString());
+                objAccesos.setIdAcceso(id);
+                perfilesAccesos.setSPerfiles(perfiles);
+                perfilesAccesos.setSAccesos(objAccesos);
+                perfilesAccesos.setFechaServidor(new Date());
+                perfilesAccesos.setIdUsuarioModifica(TraeDatoSesion.traerIdUsuario());
+                modeloPerfilesAccesos.create(perfilesAccesos);
+            }
+            FacesMessage msg = new FacesMessage("Se registro correctamente.", "");
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }catch (Exception ex) {
+          Logger.getLogger(PerfilesBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        perfiles = new SPerfiles();
+        mostrarListaPerfiles();
+        mostrarListaAccesos();
+        listaAccesosAsignados = new ArrayList<>();
+        dualListAccesos = new DualListModel<>(listaAccesosDisponibles, listaAccesosAsignados);                
     }
+    
+    
 
         //<editor-fold defaultstate="collapsed" desc="GETS y SETS">
         /**
@@ -92,17 +126,17 @@ public class PerfilesBean {
         }
         
         /**
-         * @return the listaAccesos
+         * @return the listaAccesosDisponibles
          */
-        public List<SAccesos> getListaAccesos() {
-            return listaAccesos;
+        public List<SAccesos> getListaAccesosDisponibles() {
+            return listaAccesosDisponibles;
         }
         
         /**
-         * @param listaAccesos the listaAccesos to set
+         * @param listaAccesosDisponibles the listaAccesosDisponibles to set
          */
-        public void setListaAccesos(List<SAccesos> listaAccesos) {
-            this.listaAccesos = listaAccesos;
+        public void setListaAccesosDisponibles(List<SAccesos> listaAccesosDisponibles) {
+            this.listaAccesosDisponibles = listaAccesosDisponibles;
         }
         
         /**
