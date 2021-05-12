@@ -16,7 +16,6 @@ import modelos.UsuarioModelo;
 import objetos.Usuario;
 import respuestas.RespuestaUsuario;
 
-
 /**
  *
  * @author Erick Corral
@@ -28,12 +27,12 @@ import respuestas.RespuestaUsuario;
 public class UsuarioBean {
 
     private Usuario usuario;
-    
+
     public UsuarioBean() {
-        usuario = new Usuario();  
+        usuario = new Usuario();
     }
 
-    public String autenticar(Usuario usuario) {
+    public void autenticar(Usuario usuario) {
         RespuestaUsuario respuesta = UsuarioModelo.getUsuario(usuario);
 
         try {
@@ -44,20 +43,23 @@ public class UsuarioBean {
                 context.getExternalContext().getSessionMap().put("usuario", respuesta.getLogin().getUsuario());
                 context.getExternalContext().getSessionMap().put("nombreUsuario", respuesta.getLogin().getNombreUsuario());
 
-                FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenid@ " , respuesta.getLogin().getNombreUsuario());
+                FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenid@ ", respuesta.getLogin().getNombreUsuario());
                 context.addMessage(null, msg);
-                return "faces/template.xhtml";
+
+                FacesContext.getCurrentInstance().getExternalContext().
+                        redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "template.xhtml");
+//                return "faces/template.xhtml";
 
             } else {
 
                 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error de autenticación", "Contraseña invalida");
                 FacesContext.getCurrentInstance().addMessage(null, msg);
-                return "";
+             
 
             }
         } catch (Exception ex) {
             Logger.getLogger(UsuarioBean.class.getName()).log(Level.SEVERE, null, ex);
-            return "";
+           
         }
     }
 
@@ -87,7 +89,6 @@ public class UsuarioBean {
         }
     }
 
-  
     //<editor-fold defaultstate="collapsed" desc="GETS y SETS">
     /**
      * @return the usuario
@@ -103,6 +104,5 @@ public class UsuarioBean {
         this.usuario = usuario;
     }
 
-  
 //</editor-fold>
 }
