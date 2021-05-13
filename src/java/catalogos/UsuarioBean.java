@@ -42,13 +42,13 @@ public class UsuarioBean {
                 context.getExternalContext().getSessionMap().put("idUsuario", respuesta.getLogin().getIdUsuario());
                 context.getExternalContext().getSessionMap().put("usuario", respuesta.getLogin().getUsuario());
                 context.getExternalContext().getSessionMap().put("nombreUsuario", respuesta.getLogin().getNombreUsuario());
-
+              
                 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenid@ ", respuesta.getLogin().getNombreUsuario());
                 context.addMessage(null, msg);
 
                 FacesContext.getCurrentInstance().getExternalContext().
-                        redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "template.xhtml");
-//                return "faces/template.xhtml";
+                        redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/template.xhtml");
+
 
             } else {
 
@@ -83,7 +83,7 @@ public class UsuarioBean {
                 = ((ServletContext) ctx.getContext()).getContextPath();
         try {
             ((HttpSession) ctx.getSession(false)).invalidate();
-            ctx.redirect(ctxPath + "/faces/login.xhtml");
+            ctx.redirect(ctxPath + "/login.xhtml");
         } catch (IOException ex) {
             Logger.getLogger(UsuarioBean.class.getName()).log(Level.SEVERE, null, ex);
         }

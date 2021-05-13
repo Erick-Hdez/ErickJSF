@@ -13,17 +13,26 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import entidades.SAccesos;
+import entidades.SAccesos_;
 import entidades.SPerfiles;
 import entidades.SPerfilesAccesos;
 import entidades.SPerfilesAccesosPK;
+import entidades.SPerfilesAccesos_;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CollectionJoin;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.JoinType;
 import utils.LocalEntityManagerFactory;
 
 /**
  *
- * @author Blueweb
+ * @author Erick Corral
  */
 public class SPerfilesAccesosJpaController implements Serializable {
 
@@ -209,4 +218,70 @@ public class SPerfilesAccesosJpaController implements Serializable {
         }
     }
 
+    public List<SPerfilesAccesos> traerAccesosByPerfil(SPerfiles perfil) {
+        List<SPerfilesAccesos> listaAccesos = new ArrayList<>();
+        if (perfil != null) {
+
+            //SELECT r FROM RPerfilAcceso r WHERE r.rPerfilAccesoPK.idPerfil = :idPerfil
+            EntityManager em = getEntityManager();
+            Query query = null;
+            try {
+
+                query = em.createNamedQuery("SPerfilesAccesos.findByIdPerfil", SPerfilesAccesos.class).setParameter("idPerfil", perfil.getIdPerfil());
+
+                listaAccesos = query.getResultList();
+
+            } catch (Exception ex) {
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return listaAccesos;
+    }
+
+    public List<SAccesos> traerAccesosAsignados(SPerfiles idPerfil) {
+        List<SAccesos> lista = new ArrayList<>();
+        EntityManager em = getEntityManager();
+        try {
+            em = getEntityManager();
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<SAccesos> query = cb.createQuery(SAccesos.class);
+            Root<SAccesos> perfil = query.from(SAccesos.class);
+            CollectionJoin<SAccesos, SPerfilesAccesos> usuarioPerfil = perfil.join(SAccesos_.sPerfilesAccesosCollection);
+            query.select(perfil).where(cb.equal(usuarioPerfil.get(SPerfilesAccesos_.sPerfiles), idPerfil));
+            TypedQuery<SAccesos> typedQuery = em.createQuery(query);
+
+            lista = typedQuery.getResultList();
+        } catch (Exception ex) {
+
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+        return lista;
+    }
+
+    public List<SAccesos> traerAccesosDisponibles(SPerfiles idPerfil) {
+        List<SAccesos> lista = new ArrayList<>();
+        EntityManager em = getEntityManager();
+        try {
+            em = getEntityManager();
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<SAccesos> query = cb.createQuery(SAccesos.class);
+            Root<SAccesos> perfil = query.from(SAccesos.class);
+            CollectionJoin<SAccesos, SPerfilesAccesos> usuarioPerfil = perfil.join(SAccesos_.sPerfilesAccesosCollection, JoinType.LEFT);
+            usuarioPerfil.on(cb.equal(usuarioPerfil.get(SPerfilesAccesos_.sPerfiles), idPerfil));
+            query.select(perfil).where(cb.isNull(usuarioPerfil.get(SPerfilesAccesos_.sPerfiles)));
+            TypedQuery<SAccesos> typedQuery = em.createQuery(query);
+
+            lista = typedQuery.getResultList();
+        } catch (Exception ex) {
+
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+        return lista;
+    }
 }
