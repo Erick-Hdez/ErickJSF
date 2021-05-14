@@ -8,13 +8,20 @@ package controles;
 import controles.exceptions.NonexistentEntityException;
 import entidades.SUsuarios;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.ParameterMode;
+import javax.persistence.StoredProcedureQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import objetos.ReporteClientes;
+import respuestas.Respuesta;
 import utils.LocalEntityManagerFactory;
 
 /**
@@ -135,5 +142,46 @@ public class SUsuariosJpaController implements Serializable {
             em.close();
         }
     }
-    
+
+    public List<ReporteClientes> crearReporteClienteStp(int idUsuario) {
+
+        List<ReporteClientes> listaClientes = new ArrayList<>();
+        ReporteClientes cliente = new ReporteClientes();
+
+        EntityManager em = null;
+        try {
+            em = getEntityManager();
+            em.getTransaction().begin();
+
+            StoredProcedureQuery query = em.createStoredProcedureQuery("stp_selectCClientesErick");
+            query.registerStoredProcedureParameter(1, Integer.class, ParameterMode.IN);
+            query.setParameter(1, idUsuario);
+
+            query.execute();
+
+            List<Object[]> listaResultados = query.getResultList();
+
+            for (Object[] items : listaResultados) {
+                cliente.setNumeroCliente(items[0].toString());
+                cliente.setNombreCliente(items[1].toString());
+                cliente.setTelefono(items[2].toString());
+                cliente.setNombreDistribuidor(items[3].toString());
+                cliente.setNombreCiudad(items[4].toString());
+                cliente.setNombreusuario(items[5].toString());
+                
+                listaClientes.add(cliente);
+                cliente = new ReporteClientes();
+         
+            }
+
+        } catch (Exception ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+        return listaClientes;
+    }
+
 }

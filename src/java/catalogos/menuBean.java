@@ -35,25 +35,30 @@ public class menuBean {
             case 4:
                 setPagina("/catalogos/catalogoPerfiles.xhtml");
                 break;
+            case 5:
+                setPagina("/catalogos/catalogoReportes.xhtml");
+                break;
             default:
                 setPagina("/index.xhtml");
                 break;
         }
 
     }
-
+//<editor-fold defaultstate="collapsed" desc="GETS y SETS">
+    
     /**
      * @return the pagina
      */
     public String getPagina() {
         return pagina;
     }
-
+    
     /**
      * @param pagina the pagina to set
      */
     public void setPagina(String pagina) {
         this.pagina = pagina;
     }
+//</editor-fold>
 
 }
