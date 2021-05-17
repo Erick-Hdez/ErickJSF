@@ -46,7 +46,7 @@ public class ReportesBean {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Buscar", "Busqueda exitosa");
             FacesContext.getCurrentInstance().addMessage(null, msg);
         } catch (Exception ex) {
-             Logger.getLogger(ReporteClientes.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ReporteClientes.class.getName()).log(Level.SEVERE, null, ex);
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_FATAL, "Buscar", "Se produjo un error");
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }

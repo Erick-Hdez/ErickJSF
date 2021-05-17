@@ -19,12 +19,15 @@
         <title>Devcode | inicio</title>
     </h:head>
     <h:body>
-
-        <h:form>
-            <div class="centrar" style="margin: auto">
-                <p:graphicImage id="logo-index" value="/imagenes/logo/logo_devcode_invert.jpg" style="width: 400px; height: auto" />
-            </div>
-        </h:form>
+        <ui:composition template="/template.xhtml">
+            <ui:define name="centro">
+                <h:form>
+                    <div class="centrar" style="margin: auto">
+                        <p:graphicImage id="logo-index" value="/imagenes/logo/logo_devcode_invert.jpg" style="width: 400px; height: auto" />
+                    </div>
+                </h:form>
+            </ui:define>
+        </ui:composition>
 
     </h:body>
 </html>

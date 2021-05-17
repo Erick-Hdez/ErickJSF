@@ -52,7 +52,7 @@
                                              onclick="PF('dlg-eliminar').show()" icon="ui-icon-trash"/>
                         </p:column>
                     </p:dataTable>
-
+                    <br/>
                     <p:commandButton value="Nuevo" onclick="PF('dlg-registro').show()" icon="ui-icon-plus"/>
                 </h:form>
 
@@ -68,14 +68,16 @@
                                 <p:inputText value="#{perfilesBean.perfiles.descripcion}" required="true" 
                                              requiredMessage="Se requiere Descripción" maxlength="100"/>
                             </p:panelGrid>
+                            <br/>
                             <p:pickList id="plAccesos" value="#{perfilesBean.dualListAccesos}" var="dualAccesos"
                                         itemLabel="#{dualAccesos.nombreAcceso}" itemValue="#{dualAccesos.idAcceso}">
                                 <f:facet name="sourceCaption">Accesos Disponibles</f:facet>
                                 <f:facet name="targetCaption">Accesos Asignados</f:facet>
                             </p:pickList>
+                            <br/>
                             <p:commandButton value="Registrar" actionListener="#{perfilesBean.registrarPerfil()}" 
-                                             update=":formTblPer:tblPer, msg, pnlGdRegPer"/>
-                            <p:commandButton value="Cerrar" onclick="PF('dlg-registros').hide()"/>
+                                             update=":formTblPer:tblPer, msg, pnlGdRegPer" icon="ui-icon-disk"/>
+                            <p:commandButton value="Cerrar" onclick="PF('dlg-registro').hide()" icon="ui-icon-close" style="margin-left: 5px"/>
                         </p:panel>
                     </h:form>
                 </p:dialog>
@@ -104,14 +106,16 @@
                                 <p:inputText value="#{perfilesBean.perfiles.descripcion}" required="true" 
                                              requiredMessage="Se requiere Descripción" maxlength="100"/>
                             </p:panelGrid>
+                            <br/>
                             <p:pickList id="plAccesos" value="#{perfilesBean.dualListAccesos}" var="dualAccesos"
                                         itemLabel="#{dualAccesos.nombreAcceso}" itemValue="#{dualAccesos.idAcceso}">
                                 <f:facet name="sourceCaption">Accesos Disponibles</f:facet>
                                 <f:facet name="targetCaption">Accesos Asignados</f:facet>
                             </p:pickList>
-                            <p:commandButton value="Modificar" action="#{perfilesBean.editarPerfil()}"
+                            <br/>
+                            <p:commandButton value="Modificar" action="#{perfilesBean.editarPerfil()}" icon="ui-icon-disk"
                                              update=":formTblPer:tblPer, msg"/>
-                            <p:commandButton value="Cerrar" onclick="PF('dlg-editar').hide()"/>
+                            <p:commandButton value="Cerrar" onclick="PF('dlg-editar').hide()" icon="ui-icon-close" style="margin-left: 5px"/>
                         </p:panel>
                     </h:form>
                 </p:dialog>

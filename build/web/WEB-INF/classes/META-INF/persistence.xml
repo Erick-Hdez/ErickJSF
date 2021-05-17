@@ -5,6 +5,10 @@
     <class>entidades.SAccesos</class>
     <class>entidades.SAplicaciones</class>
     <class>entidades.SPerfiles</class>
+    <class>entidades.HActivacion</class>
+    <class>entidades.CCiudad</class>
+    <class>entidades.CDistribuidor</class>
+    <class>entidades.CClientes</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
     <properties>

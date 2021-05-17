@@ -8,7 +8,8 @@
     <h:head>
 
         <title>Inicio | Dev-Code</title>
-        <link rel="icon" type="image/favicon" href="/imagenes/favicon.ico" />
+
+         <link href="imagenes/favicon-32x32.png" rel="icon" type="image/x-icon" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 
     </h:head>
@@ -25,7 +26,7 @@
 
         <p:layout fullPage="true">
             <p:layoutUnit position="north" size="130" resizable="true" closable="true" collapsible="true">
-                <h:form id="header">
+                <h:form>
                     <ui:include src="/header.xhtml"/>
                 </h:form>
             </p:layoutUnit>
@@ -35,30 +36,29 @@
             </p:layoutUnit>
 
             <p:layoutUnit position="west" size="250" header="Menú" collapsible="true">
-                <h:form id="menu">
+                <h:form>
                     <ui:include  src="/menu.xhtml"/>                   
                 </h:form>
             </p:layoutUnit>
 
-            <p:layoutUnit  position="center">
-                
-                <ui:insert name="centro">
-                    <ui:include  src="/index.xhtml"/>
+            <p:layoutUnit position="center">
+                <ui:insert name="centro" >
+                    <ui:include src="#{menu.redirecionar(0)}" />
                 </ui:insert>
             </p:layoutUnit>
         </p:layout>
 
         <p:idleMonitor timeout="60000">
-            <p:ajax event="active" onstart="PF('dlg').show()"/>
+            <p:ajax event="active" onstart="PF('inactivo').show()"/>
         </p:idleMonitor>
 
-        <p:dialog widgetVar="dlg" draggable="false" closable="false" resizable="false" header="Tu sesión a terminado" modal="true">
+        <p:dialog widgetVar="inactivo" draggable="false" closable="false" resizable="false" header="Tu sesión a terminado" modal="true">
             <p:panel>
                 <h:form>
                     <p:outputLabel value="Tú sesión se a cerrado por inactividad"/>
                     <p:commandButton value="Salir" actionListener="#{usuarioBean.logout()}" 
                                      style="margin: 0.7rem;"
-                                     oncomplete="PF('dlg').hide()"/>
+                                     oncomplete="PF('inactivo').hide()"/>
                 </h:form>
             </p:panel>
         </p:dialog> 

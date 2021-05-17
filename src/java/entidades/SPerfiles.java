@@ -43,6 +43,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "SPerfiles.findByIdUsuarioModifica", query = "SELECT s FROM SPerfiles s WHERE s.idUsuarioModifica = :idUsuarioModifica")})
 public class SPerfiles implements Serializable {
 
+    @OneToMany(mappedBy = "idPerfil")
+    private Collection<SUsuarios> sUsuariosCollection;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "sPerfiles")
     private Collection<SPerfilesAccesos> sPerfilesAccesosCollection;
 
@@ -191,6 +194,15 @@ public class SPerfiles implements Serializable {
 
     public void setSPerfilesAccesosCollection(Collection<SPerfilesAccesos> sPerfilesAccesosCollection) {
         this.sPerfilesAccesosCollection = sPerfilesAccesosCollection;
+    }
+
+    @XmlTransient
+    public Collection<SUsuarios> getSUsuariosCollection() {
+        return sUsuariosCollection;
+    }
+
+    public void setSUsuariosCollection(Collection<SUsuarios> sUsuariosCollection) {
+        this.sUsuariosCollection = sUsuariosCollection;
     }
     
 }

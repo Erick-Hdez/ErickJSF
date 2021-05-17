@@ -6,6 +6,7 @@
 package entidades;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -17,10 +18,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -44,6 +47,11 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "SUsuarios.findByIdUsuarioModifica", query = "SELECT s FROM SUsuarios s WHERE s.idUsuarioModifica = :idUsuarioModifica"),
     @NamedQuery(name = "SUsuarios.findByIdCliente", query = "SELECT s FROM SUsuarios s WHERE s.idCliente = :idCliente")})
 public class SUsuarios implements Serializable {
+
+    @OneToMany(mappedBy = "idUsuarioModifica")
+    private Collection<CClientes> cClientesCollection;
+    @OneToMany(mappedBy = "idUsuario")
+    private Collection<HActivacion> hActivacionCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -231,6 +239,24 @@ public class SUsuarios implements Serializable {
     @Override
     public String toString() {
         return "entidades.SUsuarios[ idUsuario=" + idUsuario + " ]";
+    }
+
+    @XmlTransient
+    public Collection<CClientes> getCClientesCollection() {
+        return cClientesCollection;
+    }
+
+    public void setCClientesCollection(Collection<CClientes> cClientesCollection) {
+        this.cClientesCollection = cClientesCollection;
+    }
+
+    @XmlTransient
+    public Collection<HActivacion> getHActivacionCollection() {
+        return hActivacionCollection;
+    }
+
+    public void setHActivacionCollection(Collection<HActivacion> hActivacionCollection) {
+        this.hActivacionCollection = hActivacionCollection;
     }
     
 }

@@ -11,23 +11,24 @@
     <h:body>
 
         <p:panelMenu style="width: 230px">
-            <p:submenu label="Catálogos" >            
-                <p:menuitem value="Ciudad" action="#{menu.redirecionar(1)}" icon="fa fa-city" />
-                <p:menuitem value="Tipo de Teléfono" action="#{menu.redirecionar(2)}" />
-                <p:menuitem value="Accesos" action="#{menu.redirecionar(3)}" />
-                <p:menuitem value="Perfiles" action="#{menu.redirecionar(4)}" />
-                <p:menuitem value="Reportes" action="#{menu.redirecionar(5)}" />
+            <p:submenu label="Catálogos" icon="fa fa-table">            
+                <p:menuitem value="Ciudad" action="#{menu.redirecionar(1)}" icon="fa fa-building"  />
+                <p:menuitem value="Tipo de Teléfono" action="#{menu.redirecionar(2)}" icon="fa fa-phone"/>
+                <p:menuitem value="Accesos" action="#{menu.redirecionar(3)}" icon="fa fa-lock"/>
+                <p:menuitem value="Perfiles" action="#{menu.redirecionar(4)}" icon="fa fa-user-secret"/>
+                <p:menuitem value="Reportes" action="#{menu.redirecionar(5)}" icon="fa fa-file"/>
+                <p:menuitem value="Reportes Activacion" action="#{menu.redirecionar(6)}" icon="fa fa-file" />
             </p:submenu>
             <p:submenu label="Servicios">
-                <p:menuitem value="Consultoria"/>
-                <p:menuitem value="Desarrollo"/>
-                <p:menuitem value="Soporte"/>
+                <p:menuitem value="Consultoria" icon="fa fa-group"/>
+                <p:menuitem value="Desarrollo" icon="fa fa-code"/>
+                <p:menuitem value="Soporte" icon="fa fa-database"/>
             </p:submenu>
             <p:submenu label="Home">
-                <p:menuitem value="Inicio" action="#{menu.redirecionar(6)}" />
-                <p:menuitem value="Nosotros" url="#"/>
-                <p:menuitem value="Blog" url="#"/>
-                <p:menuitem value="Contacto" url="#"/>
+                <p:menuitem value="Inicio" action="#{menu.redirecionar(0)}" icon="fa fa-home"/>
+                <p:menuitem value="Nosotros" url="#" icon="fa fa-qq"/>
+                <p:menuitem value="Blog" url="#" icon="fa fa-cubes"/>
+                <p:menuitem value="Contacto" url="#" icon="fa fa-phone"/>
             </p:submenu>
         </p:panelMenu>
 

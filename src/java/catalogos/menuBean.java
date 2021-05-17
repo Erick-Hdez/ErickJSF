@@ -20,8 +20,12 @@ import javax.faces.context.FacesContext;
 @ViewScoped
 public class menuBean {
 
-    private String pagina;
-    
+//    private String pagina;
+//
+//    public menuBean() {
+//        setPagina("/index.xhtml");
+//    }    
+//  
     public void redirecionar(int id) throws IOException {
 
         switch (id) {
@@ -50,6 +54,11 @@ public class menuBean {
                         redirect(FacesContext.getCurrentInstance()
                                 .getExternalContext().getRequestContextPath() + "/catalogos/catalogoReportes.xhtml");
                 break;
+            case 6:
+                FacesContext.getCurrentInstance().getExternalContext().
+                        redirect(FacesContext.getCurrentInstance()
+                                .getExternalContext().getRequestContextPath() + "/catalogos/catalogoReportesActivaciones.xhtml");
+                break;
             default:
                 FacesContext.getCurrentInstance().getExternalContext().
                         redirect(FacesContext.getCurrentInstance()
@@ -60,19 +69,19 @@ public class menuBean {
     }
 //<editor-fold defaultstate="collapsed" desc="GETS y SETS">
 
-    /**
-     * @return the pagina
-     */
-    public String getPagina() {
-        return pagina;
-    }
-
-    /**
-     * @param pagina the pagina to set
-     */
-    public void setPagina(String pagina) {
-        this.pagina = pagina;
-    }
+//    /**
+//     * @return the pagina
+//     */
+//    public String getPagina() {
+//        return pagina;
+//    }
+//
+//    /**
+//     * @param pagina the pagina to set
+//     */
+//    public void setPagina(String pagina) {
+//        this.pagina = pagina;
+//    }
 //</editor-fold>
 
 }
