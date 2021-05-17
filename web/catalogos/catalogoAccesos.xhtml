@@ -27,122 +27,126 @@
         <title>Accesos</title>
     </h:head>
     <h:body>
-        <h:form id="form">
-            <h1>Accesos</h1>
-            <p:growl id="msg" showDetail="true"/>
+        <ui:composition template="/template.xhtml">
+            <ui:define name="centro">
+                <h:form id="form">
+                    <h1>Accesos</h1>
+                    <p:growl id="msg" showDetail="true"/>
 
-            <p:dataTable id="table" var="acceso" value="#{accesosBean.listaAccesos}" 
-                         editable="true" rows="6" paginator="true"
-                         style="margin-bottom: 20px">
+                    <p:dataTable id="table" var="acceso" value="#{accesosBean.listaAccesos}" 
+                                 editable="true" rows="6" paginator="true"
+                                 style="margin-bottom: 20px">
 
-                <p:ajax event="rowEdit" 
-                        listener="#{accesosBean.editarAcceso(acceso)}" 
-                        update="table, :form:msg" />
+                        <p:ajax event="rowEdit" 
+                                listener="#{accesosBean.editarAcceso(acceso)}" 
+                                update="table, :form:msg" />
 
-                <p:column headerText="Id Acceso" filterBy="#{acceso.idAcceso}" filterStyle="width:100px;" filterMatchMode="contains">
-                    <p:cellEditor>
-                        <f:facet name="output">
-                            <h:outputText value="#{acceso.idAcceso}"/>
-                        </f:facet>
-                        <f:facet name="input">
-                            <p:inputNumber id="idAcceso" type="text" value="#{acceso.idAcceso}"
-                                           maxlength="50" style="width: 100%" />
-                        </f:facet>
-                    </p:cellEditor>    
-                </p:column>
+                        <p:column headerText="Id Acceso" filterBy="#{acceso.idAcceso}" filterStyle="width:100px;" filterMatchMode="contains">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="#{acceso.idAcceso}"/>
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputNumber id="idAcceso" type="text" value="#{acceso.idAcceso}"
+                                                   maxlength="50" style="width: 100%" />
+                                </f:facet>
+                            </p:cellEditor>    
+                        </p:column>
 
-                <p:column headerText="Nombre Acceso" filterBy="#{acceso.nombreAcceso}" filterStyle="width:100px;" filterMatchMode="contains">
-                    <p:cellEditor>
-                        <f:facet name="output">
-                            <h:outputText value="#{acceso.nombreAcceso}"/>
-                        </f:facet>
-                        <f:facet name="input">
-                            <p:inputText id="nombreaccs" type="text" value="#{acceso.nombreAcceso}"
-                                         maxlength="50" style="width: 100%" />
-                        </f:facet>
-                    </p:cellEditor>    
-                </p:column>
+                        <p:column headerText="Nombre Acceso" filterBy="#{acceso.nombreAcceso}" filterStyle="width:100px;" filterMatchMode="contains">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="#{acceso.nombreAcceso}"/>
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputText id="nombreaccs" type="text" value="#{acceso.nombreAcceso}"
+                                                 maxlength="50" style="width: 100%" />
+                                </f:facet>
+                            </p:cellEditor>    
+                        </p:column>
 
-                <p:column headerText="Orden" filterBy="#{acceso.orden}" filterStyle="width:100px;" filterMatchMode="contains">
-                    <p:cellEditor>
-                        <f:facet name="output">
-                            <h:outputText value="#{acceso.orden}"/>
-                        </f:facet>
-                        <f:facet name="input">
-                            <p:inputText type="text" value="#{acceso.orden}"
-                                         maxlength="50" style="width: 100%" />
-                        </f:facet>
-                    </p:cellEditor>    
-                </p:column>
-                
-                <p:column headerText="Activo" filterBy="#{acceso.activo}" filterStyle="width:100px;" filterMatchMode="contains">
-                    <p:cellEditor>
-                        <f:facet name="output">
-                            <h:outputText value="#{acceso.activo}"/>
-                        </f:facet>
-                        <f:facet name="input">
-                            <p:inputText id="activo" type="text" value="#{acceso.activo}"
-                                         maxlength="50" style="width: 100%" />
-                        </f:facet>
-                    </p:cellEditor>    
-                </p:column>
+                        <p:column headerText="Orden" filterBy="#{acceso.orden}" filterStyle="width:100px;" filterMatchMode="contains">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="#{acceso.orden}"/>
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputText type="text" value="#{acceso.orden}"
+                                                 maxlength="50" style="width: 100%" />
+                                </f:facet>
+                            </p:cellEditor>    
+                        </p:column>
 
-             
-                <p:column headerText="Fecha Baja" filterBy="#{acceso.fechaBaja}" filterStyle="width:100px;" filterMatchMode="contains">
-                    <p:cellEditor>
-                        <f:facet name="output">
-                            <h:outputText value="#{acceso.fechaBaja}"/>
-                        </f:facet>
-                        <f:facet name="input">
-                            <p:inputText id="fechaBaja" type="text" value="#{acceso.fechaBaja}"
-                                         maxlength="50" style="width: 100%" />
-                        </f:facet>
-                    </p:cellEditor>    
-                </p:column>
+                        <p:column headerText="Activo" filterBy="#{acceso.activo}" filterStyle="width:100px;" filterMatchMode="contains">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="#{acceso.activo}"/>
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputText id="activo" type="text" value="#{acceso.activo}"
+                                                 maxlength="50" style="width: 100%" />
+                                </f:facet>
+                            </p:cellEditor>    
+                        </p:column>
 
-                <p:column headerText="Editar" style="width:6rem">
-                    <p:rowEditor editTitle="Edit Row" cancelTitle="Cancel Edit" saveTitle="Save Row"/>
-                    <p:commandButton onclick="PF('eliminar').show()" type="reset" icon="ui-icon-trash" />
-                    <p:dialog header="Eliminiar Acceso" widgetVar="eliminar" minHeight="40"
-                              width="350" showEffect="fade" >
-                        <h5>Está seguro que desea eliminar este Acceso?</h5>
-                        <f:facet name="footer">
-                            <p:commandButton ajax="false" immediate="true" value="Cancelar" icon="ui-icon-cancel"
-                                             onclick="PF('eliminar').hide()" />
-                            <p:commandButton  ajax="true" immediate="true" value="Aceptar" icon="ui-icon-check"
-                                              onclick="PF('eliminar').close()"
-                                              action="#{accesosBean.eliminarAcceso(acceso)}" update=":form:table" />
-                        </f:facet>
+
+                        <p:column headerText="Fecha Baja" filterBy="#{acceso.fechaBaja}" filterStyle="width:100px;" filterMatchMode="contains">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="#{acceso.fechaBaja}"/>
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputText id="fechaBaja" type="text" value="#{acceso.fechaBaja}"
+                                                 maxlength="50" style="width: 100%" />
+                                </f:facet>
+                            </p:cellEditor>    
+                        </p:column>
+
+                        <p:column headerText="Editar" style="width:6rem">
+                            <p:rowEditor editTitle="Edit Row" cancelTitle="Cancel Edit" saveTitle="Save Row"/>
+                            <p:commandButton onclick="PF('eliminar').show()" type="reset" icon="ui-icon-trash" />
+                            <p:dialog header="Eliminiar Acceso" widgetVar="eliminar" minHeight="40"
+                                      width="350" showEffect="fade" >
+                                <h5>Está seguro que desea eliminar este Acceso?</h5>
+                                <f:facet name="footer">
+                                    <p:commandButton ajax="false" immediate="true" value="Cancelar" icon="ui-icon-cancel"
+                                                     onclick="PF('eliminar').hide()" />
+                                    <p:commandButton  ajax="true" immediate="true" value="Aceptar" icon="ui-icon-check"
+                                                      onclick="PF('eliminar').close()"
+                                                      action="#{accesosBean.eliminarAcceso(acceso)}" update=":form:table" />
+                                </f:facet>
+                            </p:dialog>
+                        </p:column>
+                    </p:dataTable>
+
+
+                    <p:commandButton value="Nuevo" type="button" onclick="PF('dlg').show()" icon="ui-icon-plus"
+                                     style="margin-right:20px;border-radius:5px; margin-top:1rem; margin-left: 20px"/>
+                    <p:dialog id="altas" header="Altas" widgetVar="dlg" minHeight="40" width="420" showEffect="fade" >
+                        <p:growl id="msgs" showDetail="true"/>
+                        <p:panelGrid columns="2">
+                            <p:outputLabel value="Nombre Acceso" />
+                            <p:inputText id="nombreAccesos" type="text" required="true" maxlength="50" 
+                                         value="#{accesosBean.accesos.nombreAcceso}"
+                                         >
+                            </p:inputText>
+
+                            <p:outputLabel value="Orden" />
+                            <p:inputNumber value="#{accesosBean.accesos.orden}" 
+                                           required="true">
+                            </p:inputNumber>
+
+                            <p:outputLabel value="Activo" />
+                            <p:selectBooleanCheckbox value="#{accesosBean.accesos.activo}" />                   
+
+                            <p:commandButton update=":form:msgs" value="Guardar" icon="ui-icon-disk"
+                                             onclick="PF('dlg').close()" action="#{accesosBean.insertarNuevoAcceso}"
+                                             style="width:8rem;display:inline-block;float:right"  />
+                        </p:panelGrid>
                     </p:dialog>
-                </p:column>
-            </p:dataTable>
-
-
-            <p:commandButton value="Nuevo" type="button" onclick="PF('dlg').show()" icon="ui-icon-plus"
-                             style="margin-right:20px;border-radius:5px; margin-top:1rem; margin-left: 20px"/>
-            <p:dialog id="altas" header="Altas" widgetVar="dlg" minHeight="40" width="420" showEffect="fade" >
-                <p:growl id="msgs" showDetail="true"/>
-                <p:panelGrid columns="2">
-                    <p:outputLabel value="Nombre Acceso" />
-                    <p:inputText id="nombreAccesos" type="text" required="true" maxlength="50" 
-                                 value="#{accesosBean.accesos.nombreAcceso}"
-                                 >
-                    </p:inputText>
-
-                    <p:outputLabel value="Orden" />
-                    <p:inputNumber value="#{accesosBean.accesos.orden}" 
-                                   required="true">
-                    </p:inputNumber>
-
-                    <p:outputLabel value="Activo" />
-                    <p:selectBooleanCheckbox value="#{accesosBean.accesos.activo}" />                   
-
-                    <p:commandButton update=":form:msgs" value="Guardar" icon="ui-icon-disk"
-                                     onclick="PF('dlg').close()" action="#{accesosBean.insertarNuevoAcceso}"
-                                     style="width:8rem;display:inline-block;float:right"  />
-                </p:panelGrid>
-            </p:dialog>
-        </h:form>
+                </h:form>
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>
 

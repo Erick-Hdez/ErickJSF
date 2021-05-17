@@ -64,7 +64,7 @@ public class PerfilesBean {
         perfiles.setActivo(true);
         perfiles.setFechaAlta(new Date());
         perfiles.setFechaServidor(new Date());
-//        perfiles.setIdUsuarioModifica(TraeDatoSesion.traerIdUsuario());
+        perfiles.setIdUsuarioModifica(TraeDatoSesion.traerIdUsuario());
 
         modeloPerfiles.create(perfiles);
         ListaIdAccesosStr = dualListAccesos.getTarget();
@@ -77,7 +77,7 @@ public class PerfilesBean {
                 perfilesAccesos.setSPerfiles(perfiles);
                 perfilesAccesos.setSAccesos(objAccesos);
                 perfilesAccesos.setFechaServidor(new Date());
-//                perfilesAccesos.setIdUsuarioModifica(TraeDatoSesion.traerIdUsuario());
+                perfilesAccesos.setIdUsuarioModifica(TraeDatoSesion.traerIdUsuario());
                 modeloPerfilesAccesos.create(perfilesAccesos);
             }
             FacesMessage msg = new FacesMessage("Se registro correctamente.", "");
@@ -120,7 +120,7 @@ public class PerfilesBean {
         SPerfilesJpaController modeloPerfiles = new SPerfilesJpaController();
         SPerfilesAccesosJpaController modeloPerfilesAccesos = new SPerfilesAccesosJpaController();
 
-//        perfiles.setIdUsuarioModifica(TraeDatoSesion.traerIdUsuario());
+        perfiles.setIdUsuarioModifica(TraeDatoSesion.traerIdUsuario());
 
         listaIdAccesosAsignadosString = dualListAccesos.getTarget();
 

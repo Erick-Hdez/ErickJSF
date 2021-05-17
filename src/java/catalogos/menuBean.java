@@ -5,9 +5,11 @@
  */
 package catalogos;
 
+import java.io.IOException;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -19,40 +21,52 @@ import javax.faces.bean.ViewScoped;
 public class menuBean {
 
     private String pagina;
-
-    public void redirecionar(int id) {
+    
+    public void redirecionar(int id) throws IOException {
 
         switch (id) {
             case 1:
-                setPagina("/catalogos/catalogoCiudad.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().
+                        redirect(FacesContext.getCurrentInstance()
+                                .getExternalContext().getRequestContextPath() + "/catalogos/catalogoCiudad.xhtml");
                 break;
             case 2:
-                setPagina("/catalogos/catalogoTipoTelefono.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().
+                        redirect(FacesContext.getCurrentInstance()
+                                .getExternalContext().getRequestContextPath() + "/catalogos/catalogoTipoTelefono.xhtml");
                 break;
             case 3:
-                setPagina("/catalogos/catalogoAccesos.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().
+                        redirect(FacesContext.getCurrentInstance()
+                                .getExternalContext().getRequestContextPath() + "/catalogos/catalogoAccesos.xhtml");
                 break;
             case 4:
-                setPagina("/catalogos/catalogoPerfiles.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().
+                        redirect(FacesContext.getCurrentInstance()
+                                .getExternalContext().getRequestContextPath() + "/catalogos/catalogoPerfiles.xhtml");
                 break;
             case 5:
-                setPagina("/catalogos/catalogoReportes.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().
+                        redirect(FacesContext.getCurrentInstance()
+                                .getExternalContext().getRequestContextPath() + "/catalogos/catalogoReportes.xhtml");
                 break;
             default:
-                setPagina("/index.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().
+                        redirect(FacesContext.getCurrentInstance()
+                                .getExternalContext().getRequestContextPath() + "/index.xhtml");
                 break;
         }
 
     }
 //<editor-fold defaultstate="collapsed" desc="GETS y SETS">
-    
+
     /**
      * @return the pagina
      */
     public String getPagina() {
         return pagina;
     }
-    
+
     /**
      * @param pagina the pagina to set
      */

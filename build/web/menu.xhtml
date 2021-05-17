@@ -4,30 +4,33 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
+        <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+        
     </h:head>
     <h:body>
-        <h:form>
-            <p:panelMenu style="width: 230px">
-                <p:submenu label="Catálogos">
-                    <p:menuitem value="Ciudad" action="#{menu.redirecionar(1)}" update="centroLayout" />
-                    <p:menuitem value="Tipo de Teléfono" action="#{menu.redirecionar(2)}" update="centroLayout"/>
-                    <p:menuitem value="Accesos" action="#{menu.redirecionar(3)}" update="centroLayout"/>
-                    <p:menuitem value="Perfiles" action="#{menu.redirecionar(4)}" update="centroLayout"/>
-                    <p:menuitem value="Reportes" action="#{menu.redirecionar(5)}" update="centroLayout"/>
-                </p:submenu>
-                <p:submenu label="Servicios">
-                    <p:menuitem value="Consultoria"/>
-                    <p:menuitem value="Desarrollo"/>
-                    <p:menuitem value="Soporte"/>
-                </p:submenu>
-                <p:submenu label="Home">
-                    <p:menuitem value="Inicio" action="#{menu.redirecionar(6)}" update="centroLayout"/>
-                    <p:menuitem value="Nosotros" url="#"/>
-                    <p:menuitem value="Blog" url="#"/>
-                    <p:menuitem value="Contacto" url="#"/>
-                </p:submenu>
-            </p:panelMenu>
-        </h:form>
+
+        <p:panelMenu style="width: 230px">
+            <p:submenu label="Catálogos" >            
+                <p:menuitem value="Ciudad" action="#{menu.redirecionar(1)}" icon="fa fa-city" />
+                <p:menuitem value="Tipo de Teléfono" action="#{menu.redirecionar(2)}" />
+                <p:menuitem value="Accesos" action="#{menu.redirecionar(3)}" />
+                <p:menuitem value="Perfiles" action="#{menu.redirecionar(4)}" />
+                <p:menuitem value="Reportes" action="#{menu.redirecionar(5)}" />
+            </p:submenu>
+            <p:submenu label="Servicios">
+                <p:menuitem value="Consultoria"/>
+                <p:menuitem value="Desarrollo"/>
+                <p:menuitem value="Soporte"/>
+            </p:submenu>
+            <p:submenu label="Home">
+                <p:menuitem value="Inicio" action="#{menu.redirecionar(6)}" />
+                <p:menuitem value="Nosotros" url="#"/>
+                <p:menuitem value="Blog" url="#"/>
+                <p:menuitem value="Contacto" url="#"/>
+            </p:submenu>
+        </p:panelMenu>
+
     </h:body>
 </html>
 

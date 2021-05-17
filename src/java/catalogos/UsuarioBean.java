@@ -45,17 +45,15 @@ public class UsuarioBean {
               
                 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenid@ ", respuesta.getLogin().getNombreUsuario());
                 context.addMessage(null, msg);
+                usuario = new Usuario();
 
                 FacesContext.getCurrentInstance().getExternalContext().
                         redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/template.xhtml");
-
-
             } else {
 
                 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error de autenticación", "Contraseña invalida");
                 FacesContext.getCurrentInstance().addMessage(null, msg);
              
-
             }
         } catch (Exception ex) {
             Logger.getLogger(UsuarioBean.class.getName()).log(Level.SEVERE, null, ex);

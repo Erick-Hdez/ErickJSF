@@ -21,7 +21,6 @@ import javax.persistence.StoredProcedureQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import objetos.ReporteClientes;
-import respuestas.Respuesta;
 import utils.LocalEntityManagerFactory;
 
 /**
