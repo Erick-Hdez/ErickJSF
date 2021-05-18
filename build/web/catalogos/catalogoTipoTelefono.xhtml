@@ -7,6 +7,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link href="imagenes/favicon-32x32.png" rel="icon" type="image/x-icon" />
         <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
         <style>
             .ui-icon-home,
@@ -109,8 +110,10 @@
                         </p:column>
 
                         <p:column headerText="Editar" style="width: 6rem">
-                            <p:rowEditor editTitle="Edit Row" cancelTitle="Cancel Edit" saveTitle="Save Row"/>
+                            <p:rowEditor editTitle="Edit Row" cancelTitle="Cancel Edit" saveTitle="Save Row"/>     
+                        </p:column>
 
+                        <p:column headerText="Eliminar">
                             <p:commandButton onclick="PF('eliminar').show()" type="reset" icon="ui-icon-trash"/>
                             <p:dialog header="Eliminiar registro" widgetVar="eliminar" minHeight="40"
                                       width="350" showEffect="fade">

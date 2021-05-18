@@ -178,8 +178,7 @@ public class CatalogoModeloTipoTelefono {
             ps.setString(2, tipoTelefono.getClave());
             ps.setInt(3, tipoTelefono.getIdTelefonia());
             ps.setBoolean(4, tipoTelefono.isActivo());
-            ps.setString(5, tipoTelefono.getFechaServidor());
-            ps.setInt(6, tipoTelefono.getId() );
+            ps.setInt(5, tipoTelefono.getId() );
                 
             int reg = ps.executeUpdate();
             if (reg > 0) {

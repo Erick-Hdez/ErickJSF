@@ -7,6 +7,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link href="imagenes/favicon-32x32.png" rel="icon" type="image/x-icon" />
         <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
         <style>
             .ui-icon-home,
@@ -42,12 +43,13 @@
                             <p:outputLabel value="#{perfiles.descripcion}"/>
                         </p:column>
 
-                        <p:column style="width: 3rem">
+                        <p:column headerText="Editar" style="width: 3rem">
                             <p:commandButton title="Editar Registro" action="#{perfilesBean.traerAccesosPerfil(perfiles)}"
                                              onclick="PF('dlg-editar').show()" icon="ui-icon-pencil"
                                              update="formModPef"/>
                         </p:column>
-                        <p:column>
+                        
+                        <p:column headerText="Eliminar" style="width: 6rem">
                             <p:commandButton title="Eliminar" action="#{perfilesBean.setPerfiles(perfiles)}"
                                              onclick="PF('dlg-eliminar').show()" icon="ui-icon-trash"/>
                         </p:column>
