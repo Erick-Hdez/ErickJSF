@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <link href="imagenes/favicon-32x32.png" rel="icon" type="image/x-icon" />
+        <title>Reportes Activación</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="/template.xhtml">
+            <ui:define name="centro">
+                <h:form id="form">
+                    <h1>Reportes Activación</h1>
+                    <p:growl id="msgs" showDetail="true"/>
+
+                    <h:panelGrid   id="busqueda" columns="2" cellpadding="7" style="margin: 0 auto">
+                        <p:outputLabel value="Fecha inicial"/>
+                        <p:datePicker  value="#{reportesActivacionBean.fechaInicio}"/>
+
+                        <p:outputLabel  value="Fecha final"/>
+                        <p:datePicker  value="#{reportesActivacionBean.fechaFin}" />
+
+                        <p:commandButton value="Buscar" icon="ui-icon-search"
+                                         process="@this form:busqueda"
+                                         action="#{reportesActivacionBean.buscarActivaciones()}"
+                                         update=":form:table, :form:msgs "/>
+                    </h:panelGrid>
+
+                    <p:dataTable id="table" var="activacion" 
+                                 value="#{reportesActivacionBean.listaReporteActivacion}" 
+                                 editable="false" style="margin-bottom:20px; 
+                                 text-align: center" paginator="true" rows="6" widgetVar="table">
+
+                        <p:column headerText="ICCID">
+                            <h:outputText value="#{activacion.iccid}"/>
+                        </p:column>
+
+                        <p:column headerText="IMEI">
+                            <h:outputText value="#{activacion.imei}"/>
+                        </p:column>
+
+                        <p:column headerText="Distribuidor">
+                            <h:outputText value="#{activacion.distribuidor}"/>
+                        </p:column>
+
+                        <p:column headerText="Cliente">
+                            <h:outputText value="#{activacion.cliente}"/>
+                        </p:column>
+
+                        <p:column headerText="Ciudad">
+                            <h:outputText value="#{activacion.ciudad}"/>
+                        </p:column>
+
+                        <p:column headerText="Descripción Tipo">
+                            <h:outputText value="#{activacion.descripcionTipo}"/>
+                        </p:column>
+
+                        <p:column headerText="Respuesta">
+                            <h:outputText value="#{activacion.respuestaAplicacion}"/>
+                        </p:column>
+
+                        <p:column headerText="Telefono">
+                            <h:outputText value="#{activacion.telefono}"/>
+                        </p:column>
+
+                        <p:column headerText="Fecha Petición">
+                            <h:outputText value="#{activacion.fechaPeticion}"/>
+                        </p:column>
+
+                        <p:column headerText="Usuario">
+                            <h:outputText value="#{activacion.idUsuario.nombreUsuario}"/>
+                        </p:column>
+
+                    </p:dataTable>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

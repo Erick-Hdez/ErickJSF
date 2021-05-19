@@ -12,6 +12,7 @@ import controles.exceptions.NonexistentEntityException;
 import entidades.SAccesos;
 import entidades.SPerfiles;
 import entidades.SPerfilesAccesos;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -30,7 +31,7 @@ import utils.TraeDatoSesion;
  */
 @ManagedBean
 @ViewScoped
-public class PerfilesBean {
+public class PerfilesBean implements Serializable{
 
     private SPerfiles perfiles = new SPerfiles();
     private List<SPerfiles> listaPerfiles;

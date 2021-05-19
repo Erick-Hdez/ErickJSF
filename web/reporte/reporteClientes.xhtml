@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Reportes</title>
+        <meta name="viewport" content="width=device-width, 
+              initial-scale=1.0"/>
+        <link href="imagenes/favicon-32x32.png" rel="icon" type="image/x-icon" />
+    </h:head>
+    <h:body>
+        <ui:composition template="/template.xhtml">
+            <ui:define name="centro">
+                <h:form id="form">
+                    <h1>Reportes</h1>
+                    <p:growl id="msgs" showDetail="true"/>
+
+                    <h:panelGrid id="busqueda" columns="2" style="margin: 0 auto">
+                        <p:outputLabel value="Usuario"/>
+                        <p:selectOneMenu id="reporte" value="#{reportesBean.usuario.idUsuario}">
+                            <f:selectItem itemLabel="---" itemValue="0"/>
+                            <f:selectItems value="#{reportesBean.listaUsuarios}" var="usuarios"
+                                           itemLabel="#{usuarios.nombreUsuario}"
+                                           itemValue="#{usuarios.idUsuario}"/>
+                        </p:selectOneMenu>
+
+                        <p:commandButton value="Buscar" icon="ui-icon-search"
+                                         process="@this form:busqueda"
+                                         action="#{reportesBean.mostrarListaReporte()}"
+                                         update=":form:table, :form:msgs "/>
+                    </h:panelGrid>
+
+                    <p:dataTable id="table" var="reporte" 
+                                 value="#{reportesBean.listaReporte}" 
+                                 editable="false" style="margin-bottom:20px; 
+                                 text-align: center" paginator="true" rows="6" widgetVar="table">
+
+                        <p:column headerText="Número Cliente">
+                            <h:outputText value="#{reporte.numeroCliente}"/>
+                        </p:column>
+
+                        <p:column headerText="Nombre Cliente">
+                            <h:outputText value="#{reporte.nombreCliente}"/>
+                        </p:column>
+
+                        <p:column headerText="Teléfono">
+                            <h:outputText value="#{reporte.telefono}"/>
+                        </p:column>
+
+                        <p:column headerText="Distribuidor">
+                            <h:outputText value="#{reporte.nombreDistribuidor}"/>
+                        </p:column>
+
+                        <p:column headerText="Ciudad">
+                            <h:outputText value="#{reporte.nombreCiudad}"/>
+                        </p:column>
+
+                        <p:column headerText="Usuario">
+                            <h:outputText value="#{reporte.nombreusuario}"/>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

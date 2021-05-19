@@ -2,36 +2,38 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-        
+
     </h:head>
     <h:body>
-
+        <!-- Render Menu Estático -->
         <p:panelMenu style="width: 230px">
-            <p:submenu label="Catálogos" icon="fa fa-table">            
-                <p:menuitem value="Ciudad" action="#{menu.redirecionar(1)}" icon="fa fa-building"  />
-                <p:menuitem value="Tipo de Teléfono" action="#{menu.redirecionar(2)}" icon="fa fa-phone"/>
-                <p:menuitem value="Accesos" action="#{menu.redirecionar(3)}" icon="fa fa-lock"/>
-                <p:menuitem value="Perfiles" action="#{menu.redirecionar(4)}" icon="fa fa-user-secret"/>
-                <p:menuitem value="Reportes" action="#{menu.redirecionar(5)}" icon="fa fa-file"/>
-                <p:menuitem value="Reportes Activacion" action="#{menu.redirecionar(6)}" icon="fa fa-file" />
-            </p:submenu>
-            <p:submenu label="Servicios">
-                <p:menuitem value="Consultoria" icon="fa fa-group"/>
-                <p:menuitem value="Desarrollo" icon="fa fa-code"/>
-                <p:menuitem value="Soporte" icon="fa fa-database"/>
-            </p:submenu>
-            <p:submenu label="Home">
+            <p:submenu label="Inicio">
                 <p:menuitem value="Inicio" action="#{menu.redirecionar(0)}" icon="fa fa-home"/>
                 <p:menuitem value="Nosotros" url="#" icon="fa fa-qq"/>
                 <p:menuitem value="Blog" url="#" icon="fa fa-cubes"/>
                 <p:menuitem value="Contacto" url="#" icon="fa fa-phone"/>
             </p:submenu>
+            <p:submenu label="Catálogos" icon="fa fa-table">            
+                <p:menuitem value="Ciudad" action="#{menu.redirecionar(1)}" icon="fa fa-building"  />
+                <p:menuitem value="Tipo de Teléfono" action="#{menu.redirecionar(2)}" icon="fa fa-phone"/>
+                <p:menuitem value="Accesos" action="#{menu.redirecionar(3)}" icon="fa fa-lock"/>
+                <p:menuitem value="Perfiles" action="#{menu.redirecionar(4)}" icon="fa fa-user-secret"/>
+            </p:submenu>
+            <p:submenu label="Reportes">
+                <p:menuitem value="Reportes" action="#{menu.redirecionar(5)}" icon="fa fa-file"/>
+                <p:menuitem value="Reportes Activacion" action="#{menu.redirecionar(6)}" icon="fa fa-file" />
+            </p:submenu>
         </p:panelMenu>
 
+        <br/>
+
+        <!-- Render Menu Dinámico -->
+        <p:panelMenu model="#{menu.model}" />
     </h:body>
 </html>
 
