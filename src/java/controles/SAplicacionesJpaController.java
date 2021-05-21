@@ -21,12 +21,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.ParameterMode;
 import javax.persistence.StoredProcedureQuery;
-import objetos.Menu;
 import utils.LocalEntityManagerFactory;
 
 /**
  *
- * @author Blueweb
+ * @author Erick Corral
  */
 public class SAplicacionesJpaController implements Serializable {
 
@@ -173,41 +172,6 @@ public class SAplicacionesJpaController implements Serializable {
     }
 
     // Ejecuta store procedure para listar elementos de menú dinámico
-//    public List<Menu> cargarDatosMenu(String usuario) {
-//        List<Menu> lista = new ArrayList<>();
-//        Menu aplicaciones = new Menu();
-//
-//        EntityManager em = null;
-//        try {
-//            em = getEntityManager();
-//            em.getTransaction().begin();
-//
-//            StoredProcedureQuery sp = em.createStoredProcedureQuery("stp_CargaMenu");
-//            sp.registerStoredProcedureParameter("usuario", String.class, ParameterMode.IN);
-//            sp.setParameter("usuario", usuario);
-//            sp.execute();
-//
-//            List<Object[]> resultados = sp.getResultList();
-//            for (Object[] items : resultados) {
-//                aplicaciones.setIdMenu(Integer.parseInt(items[0].toString()));
-//                aplicaciones.setNombreAplicacion(items[1].toString());
-//                aplicaciones.setIcono(items[2].toString());
-//                aplicaciones.setUrl(items[3].toString());
-//
-//                lista.add(aplicaciones);
-//                aplicaciones = new Menu();
-//            }
-//        } catch (Exception ex) {
-//            Logger.getLogger(SAplicacionesJpaController.class.getName()).log(Level.SEVERE, null, ex);
-//        } finally {
-//            if (em != null) {
-//                em.close();
-//            }
-//        }
-//
-//        return lista;
-//    }
-
      public List<SAplicaciones> cargarDatosMenu(String usuario) {
         List<SAplicaciones> lista = new ArrayList<>();
         SAplicaciones aplicaciones = new SAplicaciones();

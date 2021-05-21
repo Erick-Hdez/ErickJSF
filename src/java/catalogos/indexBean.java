@@ -13,14 +13,14 @@ import utils.TraeDatoSesion;
 @ManagedBean
 @RequestScoped
 
-public class indexBean {
+public class IndexBean {
 
     // variables de sesión (Persistencia)
     private int idUsuario;
     private String user;
     private String nombreUsuario;
 
-    public indexBean() {
+    public IndexBean() {
         idUsuario = TraeDatoSesion.traerIdUsuario();
         nombreUsuario = TraeDatoSesion.traerNombreUsuario();
         user = TraeDatoSesion.traerUsuario();

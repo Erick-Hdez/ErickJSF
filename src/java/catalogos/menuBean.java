@@ -14,7 +14,6 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-import objetos.Menu;
 import org.primefaces.model.menu.DefaultMenuItem;
 import org.primefaces.model.menu.DefaultMenuModel;
 import org.primefaces.model.menu.DefaultSubMenu;
@@ -29,11 +28,11 @@ import utils.TraeDatoSesion;
 @RequestScoped
 @javax.enterprise.context.SessionScoped
 
-public class menuBean implements Serializable {
+public class MenuBean implements Serializable {
 
     private MenuModel model;
     
-    public menuBean() {
+    public MenuBean() {
         model = new DefaultMenuModel();
         this.mostrarMenu();
     }
